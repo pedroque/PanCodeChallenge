@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.pedroabinajm.pancodechallenge">
+    package="com.pedroabinajm.codechallenge">
 
     <application
         android:allowBackup="true"
