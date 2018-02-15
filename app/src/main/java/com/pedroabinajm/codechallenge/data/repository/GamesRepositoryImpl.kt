@@ -28,6 +28,7 @@ class GamesRepositoryImpl @Inject constructor(
 
     private fun getGames(offset: Int, onNext: (topGames: TopGames) -> Unit = {}): Observable<TopGames> {
         return gamesDataSource.getGames(offset, Math.min(100, Math.max(20, offset)))
+                .startWith(gameCache.getGames())
                 .doOnNext {
                     onNext(it)
                 }
