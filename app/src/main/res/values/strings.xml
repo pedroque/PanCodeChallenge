@@ -4,4 +4,6 @@
     <string name="unexpected_error">Something is shaking the Force.\nPlease, be careful.</string>
     <string name="popular_games_title">Popular Games</string>
     <string name="empty_games">No games found</string>
+    <string name="viewers">Viewers: %d</string>
+    <string name="channels">Channels: %d</string>
 </resources>

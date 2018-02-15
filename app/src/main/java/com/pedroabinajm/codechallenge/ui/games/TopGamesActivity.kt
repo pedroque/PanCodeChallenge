@@ -16,6 +16,7 @@ import com.pedroabinajm.codechallenge.ui.commons.EndlessScrollListener
 import com.pedroabinajm.codechallenge.ui.commons.GridAutofitLayoutManager
 import com.pedroabinajm.codechallenge.ui.commons.Resource
 import com.pedroabinajm.codechallenge.ui.commons.SpacesItemDecoration
+import com.pedroabinajm.codechallenge.ui.game.GameActivity
 import javax.inject.Inject
 
 
@@ -112,7 +113,7 @@ class TopGamesActivity : BaseActivity() {
     }
 
     private fun navigateToGame(game: Game) {
-//        startActivity(MovieActivity.getIntent(this, movie))
+        startActivity(GameActivity.getIntent(this, game))
     }
 
     private fun setNextPageError(message: Int) {
