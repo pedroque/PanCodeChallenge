@@ -16,13 +16,16 @@
 
 package com.pedroabinajm.codechallenge.di.module
 
+import com.pedroabinajm.codechallenge.di.ActivityScope
+import com.pedroabinajm.codechallenge.ui.games.TopGamesActivity
 import dagger.Module
+import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class ActivityModule {
 
-//    @ActivityScope
-//    @ContributesAndroidInjector(modules = [GameModule::class])
-//    internal abstract fun contributeMapActivity(): MapActivity
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [GameModule::class])
+    internal abstract fun contributeTopGamesActivity(): TopGamesActivity
 
 }

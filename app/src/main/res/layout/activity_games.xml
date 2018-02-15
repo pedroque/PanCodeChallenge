@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.pedroabinajm.codechallenge.ui.commons.Resource.Status" />
+
+        <variable
+            name="resource"
+            type="com.pedroabinajm.codechallenge.ui.games.TopGamesResource" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:theme="@style/ToolbarTheme"
+            android:visibility="gone"
+            app:showIf="@{!resource.isEmpty}">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleMarginBottom="48dp"
+                app:expandedTitleMarginStart="16dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary"
+                    android:minHeight="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:title="@string/popular_games_title" />
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:visibility="gone"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:showIf="@{!resource.isEmpty}">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/games_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            app:showIf="@{resource.status == Status.LOADING &amp;&amp; resource.isEmpty}" />
+
+
+        <TextView
+            android:id="@+id/error_text"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_margin="56dp"
+            android:alpha="0"
+            android:gravity="center"
+            android:visibility="gone"
+            app:resourceText="@{resource}"
+            app:showIf="@{resource.isEmpty &amp;&amp; resource.status == Status.ERROR}" />
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

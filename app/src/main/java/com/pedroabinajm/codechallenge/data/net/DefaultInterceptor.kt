@@ -13,6 +13,7 @@ constructor() : Interceptor {
         val original = chain.request()
         val request = original.newBuilder()
                 .header("charset", "utf-8")
+                .header("Client-ID", "myo0lzq0xhodp90t1dtsketcsrdd3t")
                 .method(original.method(), original.body())
                 .build()
         return chain.proceed(request)

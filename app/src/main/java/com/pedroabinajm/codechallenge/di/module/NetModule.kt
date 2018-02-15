@@ -2,17 +2,10 @@ package com.pedroabinajm.codechallenge.di.module
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.TypeAdapter
-import com.google.gson.internal.bind.DateTypeAdapter
-import com.google.gson.reflect.TypeToken
 import com.pedroabinajm.codechallenge.BuildConfig
 import com.pedroabinajm.codechallenge.app.BaseApp
-import com.pedroabinajm.codechallenge.data.net.ApiConfig
-import com.pedroabinajm.codechallenge.data.net.DebugApiConfig
-import com.pedroabinajm.codechallenge.data.net.DefaultInterceptor
-import com.pedroabinajm.codechallenge.data.net.ReleaseApiConfig
+import com.pedroabinajm.codechallenge.data.net.*
 import com.pedroabinajm.codechallenge.di.Environment
-import com.pedroabinajm.codechallenge.di.GsonTypeAdapter
 import com.pedroabinajm.codechallenge.di.LogInterceptor
 import dagger.Module
 import dagger.Provides
@@ -24,7 +17,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -55,16 +47,9 @@ class NetModule {
 
     @Provides
     @Reusable
-    @GsonTypeAdapter(Date::class)
-    internal fun provideDateTypeAdapter(typeAdapter: DateTypeAdapter): TypeAdapter<*> = typeAdapter
-
-    @Provides
-    @Reusable
-    internal fun provideGson(@GsonTypeAdapter(Date::class) dta: TypeAdapter<*>) =
+    internal fun provideGson() =
             GsonBuilder()
                     .excludeFieldsWithoutExposeAnnotation()
-                    .registerTypeAdapter(object : TypeToken<Date>() {
-                    }.type, dta)
                     .disableHtmlEscaping()
                     .create()
 
@@ -104,8 +89,8 @@ class NetModule {
                     .client(okHttpClient)
                     .build()
 
-//    @Provides
-//    @Reusable
-//    internal fun provideBookmarkServices(retrofit: Retrofit) =
-//            retrofit.create<BookmarkServices>(BookmarkServices::class.java)
+    @Provides
+    @Reusable
+    internal fun provideGamesServices(retrofit: Retrofit) =
+            retrofit.create<GamesServices>(GamesServices::class.java)
 }
